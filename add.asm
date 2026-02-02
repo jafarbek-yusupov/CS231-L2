@@ -6,13 +6,13 @@ default rel
 extern ExitProcess
 
 section .text
-global _start
-global IntegerAaddSub_
+global Start
+global IntegerAddSub_
 
 ; -------------------------
 ; Program entry point
 ; -------------------------
-_start:
+Start:
     sub rsp, 40          ; 32-byte shadow space + alignment (Win64 ABI)
 
     ; Put test values into arg registers (a,b,c,d)
@@ -21,7 +21,7 @@ _start:
     mov r8d, 30          ; c
     mov r9d, 18          ; d
 
-    call IntegerAddSub_  ; EAX = a + b + c - d  (should be 42)
+    call IntegerAddSub_  ; EAX = a + b + c - d  (should be 42) |  echo $? 42
 
     mov ecx, eax         ; ExitProcess(exit_code = result)
     call ExitProcess     ; end program
